@@ -1,0 +1,45 @@
+version: '2.1'
+
+services:
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+
+  rabbit:
+    image: "rabbitmq:management"
+    hostname: "rabbit"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    expose:
+      - "5672"
+      - "15672"
+
+  nginx:
+    restart: always
+    build: ./nginx/
+    ports:
+      - "80:80"
+    volumes:
+      - /www/static
+    volumes_from:
+      - web
+    links:
+      - web
+
+  web:
+    build: .
+    volumes:
+      - /code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+    links:
+      - rabbit
+
+
+
+

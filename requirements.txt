@@ -1,0 +1,8 @@
+Django==2.0.5
+django-carrot==1.1.2
+djangorestframework==3.8.2
+json2html==1.2.1
+pika==0.11.2
+psycopg2-binary==2.7.4
+pytz==2018.4
+gunicorn==19.8.1
